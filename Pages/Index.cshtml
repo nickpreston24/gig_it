@@ -12,10 +12,18 @@
 
     <partial name="_GigEntryForm"/>
 
-    <div>
-        <span>content...</span>
-        <button :click="show=!show">Show/hide</button>
+    <div x-data="{ open: false }">
+        <button x-on:click="open = true">Expand</button>
+
+        <span x-show="open">
+            Content...
+        </span>
     </div>
+
+    @* <div> *@
+    @*     <span x-show="show">content...</span> *@
+    @*     <button :click="show=!show">Show/hide</button> *@
+    @* </div> *@
 </div>
 
 

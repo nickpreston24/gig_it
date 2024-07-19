@@ -4,13 +4,18 @@
 @{
 }
 
-<div class="text-center flex flex-col items-center justify-center gap-2">
+<div x-data="{show:false}" class="text-center flex flex-col items-center justify-center gap-2">
     <h1 class="text-success text-5xl display-4">Welcome to Gig IT</h1>
 
     <p>Enter your Gig App, mileage and offer below, and see how you're doing compared to other drivers.</p>
     <i>All users and data are completely anonymous.</i>
 
     <partial name="_GigEntryForm"/>
+
+    <div>
+        <span>content...</span>
+        <button :click="show=!show">Show/hide</button>
+    </div>
 </div>
 
 

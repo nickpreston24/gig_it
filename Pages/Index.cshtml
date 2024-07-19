@@ -1,0 +1,66 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model gig_it.Pages.IndexModel
+@{
+}
+
+<div class="text-center flex flex-col items-center justify-center gap-2">
+    <h1 class="text-success text-5xl display-4">Welcome to Gig IT</h1>
+
+    <p>Enter your Gig App, mileage and offer below, and see how you're doing compared to other drivers.</p>
+    <i>All users and data are completely anonymous.</i>
+
+    <partial name="_GigEntryForm"/>
+</div>
+
+
+@* GetLocationAttempt1 *@
+
+@* *@
+@* <script> *@
+@* var x = document.getElementById("demo"); *@
+@* *@
+@* function getLocation() { *@
+@*   if (navigator.geolocation) { *@
+@*     navigator.geolocation.getCurrentPosition(showPosition); *@
+@*   } else { *@
+@*     x.innerHTML = "Geolocation is not supported by this browser."; *@
+@*   } *@
+@* } *@
+@* *@
+@* function showPosition(position) { *@
+@*   x.innerHTML = "Latitude: " + position.coords.latitude + *@
+@*   "<br>Longitude: " + position.coords.longitude; *@
+@* } *@
+@* *@
+@* function showError(error) { *@
+@*   switch(error.code) { *@
+@*     case error.PERMISSION_DENIED: *@
+@*       x.innerHTML = "User denied the request for Geolocation." *@
+@*       break; *@
+@*     case error.POSITION_UNAVAILABLE: *@
+@*       x.innerHTML = "Location information is unavailable." *@
+@*       break; *@
+@*     case error.TIMEOUT: *@
+@*       x.innerHTML = "The request to get user location timed out." *@
+@*       break; *@
+@*     case error.UNKNOWN_ERROR: *@
+@*       x.innerHTML = "An unknown error occurred." *@
+@*       break; *@
+@*   } *@
+@* } *@
+@* </script> *@
+
+@* $1$ @@click="getLocation" #1# *@
+@*   <button *@
+@*       hx-get *@
+@*       hx-trigger="click" *@
+@*       hx-page="Index" *@
+@*       hx-page-handler="Stuff" *@
+@*       class="btn btn-alert"> *@
+@*       Go *@
+@*   </button> *@
+@*   $1$ <img alt="loading..." class="htmx-indicator" width="25" src="~/img/bars.svg"/> #1# *@
+@*   <span id="prices"></span> *@
+@* *@
+@*   <span id="demo"></span> *@

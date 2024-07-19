@@ -1,0 +1,33 @@
+{
+  "scripts": {
+    "dev": "dotnet watch run --launch-profile hotreloadprofile --urls http://127.1.1.0:8080",
+    "build": "yarn && npm i && dotnet build -v q && yarn buildcss:linux",
+    "restore": "dotnet restore",
+    "buildcss:dev": "cross-env TAILWIND_MODE=build postcss ./Styles/app.css -o ./wwwroot/css/app.css",
+    "buildcss:release": "cross-env NODE_ENV=production postcss ./Styles/app.css -o ./wwwroot/css/app.css",
+    "buildcss:linux": "npx tailwindcss -i ./Styles/app.css -o ./wwwroot/css/site.css",
+    "desktop": "electronize-h5 start /watch",
+    "nuke": "rm -rf node_modules wwwroot/lib wwwroot/css bin obj",
+    "reinstall": "npm run nuke && yarn && npm i && npm run  buildcss:linux",
+    "quickstart": "bash quickstart.sh",
+    "lego": "lego -w -i bricks/ -o wwwroot/dist/"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.7",
+    "autoprefixer": "^10.4.19",
+    "cross-env": "^7.0.3",
+    "daisyui": "^4.12.10",
+    "postcss": "^8.4.39",
+    "postcss-cli": "^8.3.1",
+    "tailwindcss": "^3.4.6"
+  },
+  "dependencies": {
+    "@cubejs-client/core": "^0.31.0",
+    "@polight/lego": "^2.0.0-beta.8",
+    "alpinejs": "^3.11.1",
+    "animejs": "^3.2.1",
+    "axios": "^1.2.4",
+    "chart.js": "^4.2.0",
+    "htmx.org": "^1.8.5"
+  }
+}

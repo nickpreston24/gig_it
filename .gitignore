@@ -1,0 +1,5 @@
+.env
+node_modules
+wwwroot/lib
+obj
+bin

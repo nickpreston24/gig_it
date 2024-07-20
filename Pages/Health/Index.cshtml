@@ -1,34 +1,32 @@
 @page
 @model gig_it.Pages.Health.Index
 
-@{
-    // Layout = null;
-}
-
 <section class="grid grid-cols-2">
 
-    <div>
-
-        <div class="card bg-base-100 w-96 shadow-xl">
-
-            <div class="card-body">
-
-                <h1>Alpine Test</h1>
-                <p>Alpine should open the `span` on button click and daisy should render a this `div` as a card</p>
-                <div class="card-actions justify-end">
-
-
-                    <div x-data="{ open: false }">
-                        <button x-on:click="open = true">Expand</button>
-
-                        <span x-show="open">
-                            Content...
-                        </span>
-                    </div>
-
+    <div class="card bg-base-100 w-96 shadow-xl">
+        <div class="card-body">
+            <h1 class="text-accent text-2xl">Alpine Test</h1>
+            <p>Alpine should open the `span` on button click and daisy should render a this `div` as a card</p>
+            <div class="card-actions justify-end">
+                <div x-data="{ open: false }">
+                    <button class="btn btn-primary" x-on:click="open = true">Expand</button>
+                    <span x-show="open">
+                        Content...
+                    </span>
                 </div>
             </div>
         </div>
-
     </div>
+
+    <div class="card bg-base-100 w-96 shadow-xl">
+        <div class="card-body">
+            <h1 class="text-accent text-2xl">Hydro Test</h1>
+            <p>Basic counter, but in Hydro:</p>
+            <div class="card-actions justify-end">
+                <hydro name="Counter"></hydro>
+            </div>
+        </div>
+    </div>
+
+
 </section>

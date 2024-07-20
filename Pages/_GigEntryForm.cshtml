@@ -1,4 +1,5 @@
 @using Microsoft.AspNetCore.Mvc.TagHelpers
+@using gig_it.Models
 @model gig_it.Pages.IndexModel
 
 <div x-data="{submitted:false}" class="card w-full max-w-sm shrink-0 shadow-2xl" :data-theme="selected_theme">
@@ -6,28 +7,28 @@
     <form
         asp-action="post"
         hx-indicator="#signup_indicator"
-        hx-post="@Url.Page("Index", "AddOffer")"
+        hx-post="@Url.Page("Index", "AddOffer", new { debug = true, offer = @Model.offer /*entry = @Model.Entry*/ })"
         hx-target="#gig_entry_form"
         hx-swap="innerHTML"
         class="card-body">
         <div class="form-control">
             <label class="label">
-                <span class="label-text">offer</span>
+                <span class="label-text">Offer</span>
             </label>
-            <input asp-for="Entry.offer" type="number" min="0.00" max="500.00" step=".50" placeholder="$6" class="input input-bordered bg-transparent" required/>
+            <input asp-for="offer" type="number" min="0.00" max="500.00" placeholder="$6" class="input input-bordered bg-transparent" required/>
         </div>
         <div class="form-control">
             <label class="label">
-                <span class="label-text">distance_mi</span>
+                <span class="label-text">Distance in Miles</span>
             </label>
-            <input asp-for="Entry.distance_mi" type="text" placeholder="5.0" class="input input-bordered bg-transparent"/>
+            <input asp-for="distance_mi" type="number" max="500.00" placeholder="5.0" class="input input-bordered bg-transparent"/>
         </div>
 
         <div class="form-control">
             <label class="label">
-                <span class="label-text">distance_mi per Gallon</span>
+                <span class="label-text">Miles per Gallon</span>
             </label>
-            <input asp-for="Entry.MPG" type="text" min="20.00" step="1" max="120.00" placeholder="20.00" class="input input-bordered bg-transparent"/>
+            <input asp-for="MPG" type="number" min="20.00" max="120.00" placeholder="20.00" class="input input-bordered bg-transparent"/>
         </div>
 
         <div class="form-control mt-6">
@@ -35,9 +36,18 @@
                 x-on:click="submitted=true"
                 class="btn btn-primary">
                 Submit!
-                <box-icon name="rocket"></box-icon>
+                <box-icon name="rocket" :color="selected_box_icon_color"></box-icon>
+            </button>
+
+            <button
+                hx-get="@Url.Page("Index", "Randomize")"
+                class="btn btn-primary">
+                Random
+                <box-icon name="dice-5" color="white"></box-icon>
             </button>
         </div>
+
+        @* <hydro name="HydroSelect"></hydro> *@
 
         <span x-show="submitted" id="signup_indicator" class="htmx-indicator h-0">
             <label>submitting your offer ...</label>

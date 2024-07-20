@@ -1,4 +1,5 @@
 using System.Text;
+using Microsoft.AspNetCore.Mvc;
 
 namespace gig_it.Models;
 
@@ -7,10 +8,17 @@ public record GigOffer
     public string id { get; set; } = string.Empty;
     public string app_name { get; set; } = string.Empty;
     public string route_url { get; set; } = string.Empty;
+
+    // [BindProperty(SupportsGet = true)] 
     public double offer { get; set; }
+
+    // [BindProperty(SupportsGet = true)]
     public double distance_mi { get; set; }
     public double fuel_cost_per_mi { get; set; }
+
     public double tank_size_gal { get; set; }
+
+    // [BindProperty(SupportsGet = true)] 
     public double MPG { get; set; } = 0.00;
 
 
@@ -31,6 +39,11 @@ public record GigOffer
         return new StringBuilder()
             .AppendLine($"{nameof(id)}:{id}")
             .AppendLine($"{nameof(app_name)}:{app_name}")
+            .AppendLine($"{nameof(offer)}:{offer}")
+            .AppendLine($"{nameof(distance_mi)}:{distance_mi}")
+            .AppendLine($"{nameof(MPG)}:{MPG}")
+            .AppendLine($"{nameof(profit)}:{profit}")
+            .AppendLine($"{nameof(profit_per_mile)}:{profit_per_mile}")
             .ToString();
     }
 }

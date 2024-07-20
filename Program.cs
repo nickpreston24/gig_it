@@ -3,6 +3,7 @@ using CodeMechanic.Embeds;
 using CodeMechanic.FileSystem;
 using CodeMechanic.Types;
 using CodeMechanic.RazorHAT.Services;
+using Hydro.Configuration;
 
 // Load and inject .env files & values
 DotEnv.Load();
@@ -12,6 +13,7 @@ bool dev_mode = Environment.GetEnvironmentVariable("DEVMODE").ToBoolean();
 var builder = WebApplication.CreateBuilder(args);
 
 var props_service = new PropertyCache();
+
 builder.Services.AddScoped<IJsonConfigService, JsonConfigService>();
 builder.Services.AddSingleton<IMarkdownService, MarkdownService>();
 builder.Services.AddSingleton<IImageService, ImageService>();
@@ -33,6 +35,7 @@ builder.Services.AddSingleton<IEmbeddedResourceQuery>(
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddHydro();
 
 var app = builder.Build();
 
@@ -50,6 +53,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+app.UseHydro(builder.Environment);
 
 app.MapRazorPages();
 

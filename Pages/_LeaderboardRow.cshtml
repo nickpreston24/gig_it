@@ -5,7 +5,7 @@
 
 @foreach (var row in rows)
 {
-    <tr x-data="{show_details: false}">
+    <tr x-transition x-data="{show_details: false}">
         <th>
             <div class="flex items-center gap-3">
                 <div class="avatar placeholder">
@@ -13,10 +13,8 @@
                         <span class="text-3xl">@row.UserName.ToUpperInvariant()[0]</span>
                     </div>
                 </div>
-
             </div>
         </th>
-        @* <th>$@(Maths.Round(@row.offer),2)</th> *@
         <th>$@(Math.Round(@row.offer, 2))</th>
         <td>
             $@(@row.profit)
@@ -32,6 +30,28 @@
                 <a target="_blank" href="@row.route_url">
                     <div class="font-bold text-secondary truncate">@row.app_name.Trim()</div>
                 </a>
+            </div>
+            <div class="tooltip" data-tip="Delete this record">
+                <form hx-page="Index" hx-target="#leaderboard" hx-delete method="delete">
+                    <button
+                        hx-swap="outerHTML"
+                        class="btn btn-accent"
+                        asp-page-handler="Remove">
+                        UnRegister Now
+                    </button>
+                    <button
+                        hx-swap="outerHTML"
+                        asp-page-handler="Remove"
+                        class="btn btn-accent">
+                        Delete my stuff
+                    </button>
+                </form>
+                @* <button hx-trigger="click" *@
+                @*         hx-delete="@Url.Page("Index", "Remove", new { id = row.id })" *@
+                @*         hx-target="#leaderboard" *@
+                @*         class="btn bg-transparent border-transparent text-lg"> *@
+                @*     <box-icon name='trash'></box-icon> *@
+                @* </button> *@
             </div>
         </td>
 

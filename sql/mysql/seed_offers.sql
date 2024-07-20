@@ -31,6 +31,7 @@ create table if not exists offers
     PRIMARY KEY (id)
 );
 
+/*
 insert into offers (app_name, offer, distance_mi, mpg, fuel_cost_per_mi)
 values ('UberEats', 6.00, 2.00, 23.00, -0.16),
        ('UberEats', 5.00, 2.00, 23.00, -0.16),
@@ -39,7 +40,16 @@ values ('UberEats', 6.00, 2.00, 23.00, -0.16),
        ('Instacart', 11.34, 4.00, 23.00, -0.16),
        ('Instacart', 11.13, 2.80, 23.00, -0.16)
 ;
-
+ */
 
 select *
-from offers;
+from offers
+limit 10 
+offset 5
+;
+
+
+/*
+ 
+ delete from offers where id > 0;
+ */

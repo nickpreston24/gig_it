@@ -3,12 +3,15 @@
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
+    <meta name="hydro-config"/>
+    <script defer src="~/hydro/hydro.js" asp-append-version="true"></script>
+    <script defer src="~/hydro/alpine.js" asp-append-version="true"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>@ViewData["Title"] - Git IT</title>
     <script src="~/lib/boxicons/dist/boxicons.js"></script>
     <link href="~/lib/daisyui/dist/full.css" rel="stylesheet" type="text/css"/>
     <script src="~/lib/htmx.org/dist/htmx.min.js"></script>
-    <script defer src="~/lib/alpinejs/dist/cdn.min.js"></script>
+    @* <script defer src="~/lib/alpinejs/dist/cdn.min.js"></script> *@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
 </head>
 <body x-data="setup_layout()" :data-theme="selected_theme">
@@ -17,20 +20,30 @@
         <slot name="links">
             <li>
                 <a href="/">
-                    <box-icon name='home-alt' color="white"></box-icon>
+                    <box-icon name='home-alt' :color="selected_box_icon_color"></box-icon>
                     Home
                 </a>
             </li>
 
             <li>
                 <a target="_" :href="my_github">
-                    <box-icon type='logo' color="white" class="bg-accent-content/25" name='github'></box-icon>
+                    <box-icon type='logo' :color="selected_box_icon_color" class="bg-accent-content/25" name='github'></box-icon>
                     GitHub
                     <div class="badge badge-secondary">+100</div>
                 </a>
             </li>
 
+            <li>
+                <a href="/Health">
+                    <box-icon type='logo' :color="selected_box_icon_color" class="bg-accent-content/25" name='github'></box-icon>
+                    Health
+                </a>
+            </li>
+
+
         </slot>
+
+        <box-icon name='wallet' :color="selected_box_icon_color"></box-icon>
 
         <slot name="corner">
             @* <div class="dropdown dropdown-end"> *@
@@ -57,7 +70,7 @@
 
 </header>
 <div class="">
-    <main role="main" class="pb-3">
+    <main role="main" class="pb-3 m-4">
         @RenderBody()
     </main>
 </div>
@@ -81,9 +94,20 @@
     function setup_layout() {
         return {
             my_github: 'https://github.com/nickpreston24?tab=repositories',
+            get selected_box_icon_color() { return 'cyan' },
             slogan:'lorem ipsum.... !',
+            gradients: {
+                dark: "bg-gradient-to-l from-blue-500 to-violet-800",
+                light: "bg-gradient-to-r from-amber-200 to-yellow-500",
+                valentine: 'bg-gradient-to-r from-pink-500 to-rose-500',
+                lemonade: 'bg-gradient-to-r from-teal-400 to-yellow-200'
+            },
+            get current_gradient() {
+                console.log('selected_theme :>> ', this.selected_theme);
+                let found = this?.gradients[this.selected_theme] ?? '';
+                return found;
+            },
             themes: [
-                
               "light",
               "dark",
               "cupcake",

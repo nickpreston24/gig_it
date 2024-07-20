@@ -91,7 +91,6 @@ public class IndexModel : PageModel
                         offer.ToString())
                 ))
             .ToList();
-        // if (debug) 
         // if (debug) offers.Dump(nameof(offers));
         return Partial("_Leaderboard", this);
     }

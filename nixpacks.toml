@@ -1,6 +1,10 @@
 # Build plan from the provider
+#[phases.setup]
+#nixPkgs = ['nodejs', 'yarn', 'alpinejs', 'cowsay']
+
 [phases.setup]
-nixPkgs = ['nodejs', 'yarn', 'alpinejs', 'cowsay']
+nixPkgs = ['nodejs', 'yarn']
+
 [phases.build]
 cmds = ['yarn run build']
 

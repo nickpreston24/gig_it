@@ -15,5 +15,5 @@ module.exports = {
       bermuda: "#78dcca",
     },
   },
-  plugins: [require("tailwindcss"), require("autoprefixer")],
+  plugins: [require("tailwindcss"), require("autoprefixer"), require('daisyui')],
 };

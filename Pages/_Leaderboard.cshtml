@@ -24,7 +24,7 @@
 
     <div class="form-control">
         <input
-            hx-get="@Url.Page("Index", "Search", new { debug = true, query = @Model.Query })"
+            hx-get="@Url.Page("Index", "Search", new { debug = true })"
             hx-target="#leaderboard"
             asp-for="Query"
             hx-swap="innerHTML"

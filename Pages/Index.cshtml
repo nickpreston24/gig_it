@@ -16,6 +16,7 @@
     <div id="gigs_grid" class="grid grid-cols-1 gap-2">
 
         <div
+            class="bg-gradient-to-r from-amber-200 to-yellow-500"
             hx-trigger="load"
             hx-get="@Url.Page("Index", "Search", new { start = 10, end = 0, debug = false })"
             hx-swap="innerHTML"
@@ -25,7 +26,9 @@
 
         </div>
 
-        <div id="gig_entry_form">
+        <div
+            class="bg-gradient-to-r from-teal-400 to-yellow-200"
+            id="gig_entry_form">
             <partial name="_GigEntryForm"/>
         </div>
 

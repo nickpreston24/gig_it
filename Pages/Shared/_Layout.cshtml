@@ -11,11 +11,52 @@
     <script defer src="~/lib/alpinejs/dist/cdn.min.js"></script>
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
 </head>
-<body>
+<body x-data="setup_layout()" :data-theme="selected_theme">
 <header>
+    <hydro-nav>
+        <slot name="links">
+            <li>
+                <a href="/">
+                    <box-icon name='home-alt' color="white"></box-icon>
+                    Home
+                </a>
+            </li>
+
+            <li>
+                <a target="_" :href="my_github">
+                    <box-icon type='logo' color="white" class="bg-accent-content/25" name='github'></box-icon>
+                    GitHub
+                    <div class="badge badge-secondary">+100</div>
+                </a>
+            </li>
+
+        </slot>
+
+        <slot name="corner">
+            @* <div class="dropdown dropdown-end"> *@
+            <div tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+                <div x-transition>
+                    <select
+                        x-transition
+                        x-model="selected_theme"
+                        x-effect="console.log(selected_theme); localStorage.setItem('theme', selected_theme)"
+                        class="select select-accent w-auto max-w-xs">
+                        <option disabled selected>Pick your favorite theme</option>
+                        <template x-cloak x-for="theme in themes">
+                            <option
+                                :key="theme"
+                                :value="theme"
+                                x-text="theme">
+                            </option>
+                        </template>
+                    </select>
+                </div>
+            </div>
+        </slot>
+    </hydro-nav>
 
 </header>
-<div class="container">
+<div class="">
     <main role="main" class="pb-3">
         @RenderBody()
     </main>
@@ -23,9 +64,62 @@
 
 @await RenderSectionAsync("Scripts", required: false)
 </body>
+<hydro-footer>
+    <slot name="links">
+        <a target="_" :href="my_github">
+            <button class="btn text-lg">
+                <box-icon type='logo' color="white" class="bg-accent-content/25" name='github'></box-icon>
+                GitHub
+                <div class="badge badge-secondary">+100</div>
+            </button>
+        </a>
+    </slot>
+</hydro-footer>
 
-<footer>
-    @* <box-icon name="rocket"></box-icon> *@
-    @* <span>Gig IT</span> *@
-</footer>
+<script>
+    let previous = localStorage.getItem('theme') ?? "light";
+    function setup_layout() {
+        return {
+            my_github: 'https://github.com/nickpreston24?tab=repositories',
+            slogan:'lorem ipsum.... !',
+            themes: [
+                
+              "light",
+              "dark",
+              "cupcake",
+              "bumblebee",
+              "emerald",
+              "corporate",
+              "synthwave",
+              "retro",
+              "cyberpunk",
+              "valentine",
+              "halloween",
+              "garden",
+              "forest",
+              "aqua",
+              "lofi",
+              "pastel",
+              "fantasy",
+              "wireframe",
+              "black",
+              "luxury",
+              "dracula",
+              "cmyk",
+              "autumn",
+              "business",
+              "acid",
+              "lemonade",
+              "night",
+              "coffee",
+              "winter",
+              "dim",
+              "nord",
+              "sunset",    
+            ],
+            selected_theme: previous
+        }
+    }
+</script>
+
 </html>

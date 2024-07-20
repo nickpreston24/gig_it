@@ -12,11 +12,10 @@ public class IndexModel : PageModel
 {
     private readonly ILogger<IndexModel> _logger;
 
-    [BindProperty] public string Query { get; set; } = string.Empty;
+    [BindProperty(SupportsGet = true)] public string Query { get; set; } = string.Empty;
 
     public List<GigOffer> Offers => offers;
     private static List<GigOffer> offers = new();
-
 
     public GigOffer Entry = new GigOffer()
     {
@@ -52,7 +51,7 @@ public class IndexModel : PageModel
                 , items => items
                     .Where(i => i.ToString().Contains(query)))
             .ToList();
-        if (debug) Console.WriteLine($"limit: {end}, offset: {start}, query: {query}");
+        if (debug) Console.WriteLine($"limit: {end}, offset: {start}, query: {query}, Query: {Query}");
         // if (debug) offers.Dump(nameof(offers));
         return Partial("_Leaderboard", this);
     }

@@ -5,10 +5,11 @@
     <meta charset="utf-8"/>
     <meta name="hydro-config"/>
     <script defer src="~/hydro/hydro.js" asp-append-version="true"></script>
-    <script defer src="~/hydro/alpine.js"
-
+    @* src="~/hydro/alpine.js" *@
+    <script defer
+            src="~/hydro/alpine.js"
+            @* src="~/lib/alpinejs/dist/cdn.min.js" *@
             asp-fallback-src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
-
             asp-append-version="true"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>@ViewData["Title"] - Git IT</title>
@@ -16,7 +17,6 @@
     <link href="~/lib/daisyui/dist/full.css" rel="stylesheet" type="text/css"/>
     <script src="~/lib/htmx.org/dist/htmx.min.js"
             asp-fallback-src="https://unpkg.com/htmx.org@2.0.1"></script>
-    @* <script defer src="~/lib/alpinejs/dist/cdn.min.js"></script> *@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
 </head>
 <body x-data="setup_layout()" :data-theme="selected_theme">
@@ -94,9 +94,10 @@
     </slot>
 </hydro-footer>
 
-<script>
+<script type="text/javascript">
     let previous = localStorage.getItem('theme') ?? "light";
     function setup_layout() {
+        console.log('setup_layout() initializing ...')
         return {
             my_github: 'https://github.com/nickpreston24?tab=repositories',
             get selected_box_icon_color() { return 'cyan' },

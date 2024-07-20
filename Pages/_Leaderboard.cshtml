@@ -1,0 +1,51 @@
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model gig_it.Pages.IndexModel
+@{
+    var rows = Model.Offers;
+    Console.WriteLine("offers:  " + rows.Count);
+}
+
+<div
+    class="flex flex-col justify-center items-center text-sm text-info gap-10">
+
+    <div x-show="true" class="flex flex-row gap-6">
+        <button class="btn text-lg">
+            Offers
+            <div class="badge badge-secondary">@rows.Count</div>
+        </button>
+        @* <button class="btn text-lg"> *@
+        @*     Query *@
+        @*     <div class="badge badge-secondary">@Model.Query</div> *@
+        @* </button> *@
+    </div>
+
+</div>
+<div class="overflow-x-auto wrapper">
+
+    <div class="form-control">
+        <input
+            hx-get="@Url.Page("Index", "Search", new { debug = true, query = @Model.Query })"
+            hx-target="#leaderboard"
+            asp-for="Query"
+            hx-swap="innerHTML"
+            hx-trigger="keyup changed delay:250ms"
+            type="text" placeholder="Search offers"
+            class="input input-bordered bg-transparent" required/>
+    </div>
+
+    <table class="table w-full">
+        <thead>
+        <tr>
+            <th></th>
+            <th>offer</th>
+            <th>Profit</th>
+            <th>% profit</th>
+            <th>$/mi.</th>
+            <th>profit/mi.</th>
+            <th>run cost</th>
+            <th>Gig App</th>
+        </tr>
+        </thead>
+        <partial name="_LeaderboardRow" model="@rows"/>
+    </table>
+</div>

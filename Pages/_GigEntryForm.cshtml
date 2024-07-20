@@ -2,28 +2,31 @@
 @model gig_it.Pages.IndexModel
 
 <div x-data="{submitted:false}" class="card w-full max-w-sm shrink-0 shadow-2xl">
+    @* <span x-text="submitted"></span> *@
     <form
         hx-indicator="#signup_indicator"
         hx-post="@Url.Page("Index", "AddOffer")"
+        hx-target="#gig_entry_form"
+        hx-swap="innerHTML"
         class="card-body">
         <div class="form-control">
             <label class="label">
-                <span class="label-text">Offer</span>
+                <span class="label-text">offer</span>
             </label>
-            <input asp-for="Offer" type="number" min="0.00" max="500.00" step=".50" placeholder="$6" class="input input-bordered bg-transparent" required/>
+            <input asp-for="Entry.offer" type="number" min="0.00" max="500.00" step=".50" placeholder="$6" class="input input-bordered bg-transparent" required/>
         </div>
         <div class="form-control">
             <label class="label">
-                <span class="label-text">Miles</span>
+                <span class="label-text">distance_mi</span>
             </label>
-            <input asp-for="Miles" type="text" placeholder="5.0" class="input input-bordered bg-transparent"/>
+            <input asp-for="Entry.distance_mi" type="text" placeholder="5.0" class="input input-bordered bg-transparent"/>
         </div>
 
         <div class="form-control">
             <label class="label">
-                <span class="label-text">Miles per Gallon</span>
+                <span class="label-text">distance_mi per Gallon</span>
             </label>
-            <input asp-for="MPG" type="text" min="20.00" step="1" max="120.00" placeholder="20.00" class="input input-bordered bg-transparent"/>
+            <input asp-for="Entry.MPG" type="text" min="20.00" step="1" max="120.00" placeholder="20.00" class="input input-bordered bg-transparent"/>
         </div>
 
         <div class="form-control mt-6">
@@ -31,11 +34,12 @@
                 x-on:click="submitted=true"
                 class="btn btn-primary">
                 Submit!
+                <box-icon name="rocket"></box-icon>
             </button>
         </div>
 
         <span x-show="submitted" id="signup_indicator" class="htmx-indicator h-0">
-            <label>signing up ...</label>
+            <label>submitting your offer ...</label>
             <img class="w-8" alt="bars" src="~/img/loaders/circle_bars.svg"/>
         </span>
     </form>

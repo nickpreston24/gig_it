@@ -1,0 +1,50 @@
+@model List<gig_it.Models.GigOffer>
+@{
+    var rows = @Model;
+}
+
+@foreach (var row in rows)
+{
+    <tr x-data="{show_details: false}">
+        <th>
+            <div class="flex items-center gap-3">
+                <div class="avatar placeholder">
+                    <div class="bg-neutral text-neutral-content w-24 rounded-full">
+                        <span class="text-3xl">@row.UserName.ToUpperInvariant()[0]</span>
+                    </div>
+                </div>
+
+            </div>
+        </th>
+        @* <th>$@(Maths.Round(@row.offer),2)</th> *@
+        <th>$@(Math.Round(@row.offer, 2))</th>
+        <td>
+            $@(@row.profit)
+        </td>
+
+        <td>@row.percent_profit %</td>
+        <td>$@row.dollars_per_mile</td>
+        <td>$@row.profit_per_mile</td>
+        <td>$@(Math.Abs(@row.run_cost).Round(2))</td>
+
+        <td>
+            <div class="tooltip" data-tip="Visit">
+                <a target="_blank" href="@row.route_url">
+                    <div class="font-bold text-secondary truncate">@row.app_name.Trim()</div>
+                </a>
+            </div>
+        </td>
+
+    </tr>
+}
+
+<style>
+    
+    .truncate {
+      width: 250px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+      
+</style>

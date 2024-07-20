@@ -11,7 +11,6 @@ bool dev_mode = Environment.GetEnvironmentVariable("DEVMODE").ToBoolean();
 
 var builder = WebApplication.CreateBuilder(args);
 
-
 var props_service = new PropertyCache();
 builder.Services.AddScoped<IJsonConfigService, JsonConfigService>();
 builder.Services.AddSingleton<IMarkdownService, MarkdownService>();

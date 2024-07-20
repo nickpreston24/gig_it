@@ -4,9 +4,9 @@
 
 [phases.setup]
 nixPkgs = ['nodejs', 'yarn']
-
-[phases.build]
-cmds = ['yarn run build']
+#
+#[phases.build]
+#cmds = ['yarn run build']
 
 #
 #[start]

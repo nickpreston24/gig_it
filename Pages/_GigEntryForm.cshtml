@@ -3,11 +3,11 @@
 @model gig_it.Pages.IndexModel
 
 <div x-data="{submitted:false}" class="card w-full max-w-sm shrink-0 shadow-2xl" :data-theme="selected_theme">
-    <span x-text="submitted"></span>
+    @* <span x-text="submitted"></span> *@
     <form
         asp-action="post"
         hx-indicator="#signup_indicator"
-        hx-post="@Url.Page("Index", "AddOffer", new { debug = true, offer = @Model.offer /*entry = @Model.Entry*/ })"
+        hx-post="@Url.Page("Index", "AddOffer", new { debug = true, offer = Model.offer /*entry = @Model.Entry*/ })"
         hx-target="#gig_entry_form"
         hx-swap="innerHTML"
         class="card-body">

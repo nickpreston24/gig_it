@@ -45,14 +45,23 @@
             </div>
 
             <div
+                id="gig_stats"
+                hx-get="@Url.Page("Index", "Stats")"
+                hx-swap="innerHTML"
+                hx-trigger="load"
+                hx-indicator="#gig_stats_loader"
+                hx-target="#gig_stats"
                 x-show="views.stats.show"
                 x-transition:enter="transition ease-out duration-300"
                 x-transition:enter-start="opacity-0 scale-90"
                 x-transition:enter-end="opacity-100 scale-100"
                 x-transition:leave="transition ease-in duration-300"
                 x-transition:leave-start="opacity-100 scale-100"
-                x-transition:leave-end="opacity-0 scale-90"
-                id="aggregated_stats" :class="current_gradient">
+                x-transition:leave-end="opacity-0 scale-90">
+                <span id="gig_stats_loader" class="htmx-indicator">
+                    <label>loading ...</label>
+                    <img class="w-52" alt="bars" src="~/img/loaders/loader_10.svg"/>
+                </span>
                 <partial name="_GigStats"></partial>
             </div>
         </div>
@@ -77,7 +86,7 @@
 
             <span id="leaderboard_loader" class="htmx-indicator">
                 <label>loading ...</label>
-                <img class="w-64" alt="bars" src="~/img/loaders/loader_10.svg"/>
+                <img class="w-52" alt="bars" src="~/img/loaders/loader_10.svg"/>
             </span>
         </div>
 
@@ -93,10 +102,10 @@
                 stats: { show: false },
              },
             start_view_timers() {
-                setTimeout(()=> this.views.leaderboard.show = true , 250);
+                setTimeout(()=> this.views.intro.show = true , 250);
                 setTimeout(()=> this.views.entry_form.show = true , 500);
-                setTimeout(()=> this.views.intro.show = true , 750);
-                setTimeout(()=> this.views.stats.show = true , 1000);
+                setTimeout(()=> this.views.stats.show = true , 750);
+                setTimeout(()=> this.views.leaderboard.show = true , 1000);
             }
         }    
     }

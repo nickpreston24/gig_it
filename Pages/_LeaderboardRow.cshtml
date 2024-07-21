@@ -1,6 +1,6 @@
 @model List<gig_it.Models.GigOffer>
 @{
-    var rows = @Model;
+    var rows = Model;
 }
 
 @foreach (var row in rows)
@@ -15,15 +15,15 @@
                 </div>
             </div>
         </th>
-        <th>$@(Math.Round(@row.offer, 2))</th>
+        <th>$@(Math.Round(row.offer, 2))</th>
         <td>
-            $@(@row.profit)
+            $@(row.profit)
         </td>
 
         <td>@row.percent_profit %</td>
         <td>$@row.dollars_per_mile</td>
         <td>$@row.profit_per_mile</td>
-        <td>$@(Math.Abs(@row.run_cost).Round(2))</td>
+        <td>$@(Math.Abs(row.run_cost).Round(2))</td>
 
         <td>
             <div class="tooltip" data-tip="Visit">

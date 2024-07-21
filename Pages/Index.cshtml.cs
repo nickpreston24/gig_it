@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Diagnostics;
+using System.Text.RegularExpressions;
 using CodeMechanic.Diagnostics;
 using CodeMechanic.Types;
 using gig_it.Models;
@@ -14,8 +15,8 @@ public class IndexModel : PageModel
     private readonly ILogger<IndexModel> _logger;
     private double low_offer_upper_bound = .50;
     private double high_offer_lower_bound = 1.00;
-    public List<GigStats> Stats => stats;
-    private static List<GigStats> stats = new();
+    public GigStats Stats => stats;
+    private static GigStats stats = new();
     public List<GigOffer> Offers => offers;
     private static List<GigOffer> offers = new();
 
@@ -35,10 +36,41 @@ public class IndexModel : PageModel
         _logger = logger;
     }
 
-    public async void OnGet()
+    public async Task<IActionResult> OnGetStats()
     {
-        using var connection = SQLConnections.GetMySQLConnectionString().AsConnection();
-        var results = await connection.QueryAsync(@"Select * from AverageOffers;");
+        Console.WriteLine(nameof(OnGetStats));
+        var timer = Stopwatch.StartNew();
+        using var connection1 = SQLConnections.GetMySQLConnectionString().AsConnection();
+        using var connection2 = SQLConnections.GetMySQLConnectionString().AsConnection();
+        var task1 = connection1.QueryAsync<GigStats>(@"Select * from AverageOffers;");
+        var task2 = connection2.QueryAsync<GigStats>(@"select * from OffersOverView");
+
+
+        await Task.WhenAll(task1, task2);
+
+        var results = (await task1).ToList()
+            .SingleOrDefault();
+        var results2 = (await task2).ToList()
+            .SingleOrDefault();
+        // results2.Dump("gig stats");
+        var merged_stats = new GigStats().With(gs =>
+        {
+            gs.Instacart_Avg_Offer = results.Instacart_Avg_Offer;
+            gs.UberEats_Avg_Offer = results.UberEats_Avg_Offer;
+            gs.UberX_Avg_Offer = results.UberX_Avg_Offer;
+            gs.DoorDash_Avg_Offer = results.DoorDash_Avg_Offer;
+
+            gs.average_fuel_cost_per_mi = results2.average_fuel_cost_per_mi;
+            gs.average_offer = results2.average_offer;
+            gs.average_mpg = results2.average_mpg;
+            gs.average_trip = results2.average_trip;
+        });
+
+        timer.Stop();
+        Console.WriteLine(timer.Elapsed);
+        stats = merged_stats.Dump("merged");
+
+        return Partial("_GigStats", this);
     }
 
     public async Task OnGetRandomize(GigOffer entry, bool debug = false)
@@ -121,9 +153,4 @@ public class IndexModel : PageModel
     //     distance_mi = 5.0,
     //     MPG = 23.00
     // };
-}
-
-public record GigStats
-{
-    public double AverageOffer { get; set; }
 }

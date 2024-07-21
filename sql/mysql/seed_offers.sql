@@ -44,7 +44,8 @@ values ('UberEats', 6.00, 2.00, 23.00, -0.16),
 
 select *
 from offers
-limit 10 offset 5
+order by created_at desc;
+# limit 10 offset 5
 ;
 
 
@@ -54,9 +55,9 @@ limit 10 offset 5
  */
 
 ### Average Offers
-
 CREATE or replace VIEW AverageOffers AS
-SELECT FORMAT(sum(case when app_name = 'UberEats' then offer else 0 end) * 100 / SUM(offer), 2)  as UberEats_Avg_Offer,
+SELECT FORMAT(sum(offer), 2)                                                                     as offers_total,
+       FORMAT(sum(case when app_name = 'UberEats' then offer else 0 end) * 100 / SUM(offer), 2)  as UberEats_Avg_Offer,
        FORMAT(sum(case when app_name = 'UberX' then offer else 0 end) * 100 / SUM(offer), 2)     as UberX_Avg_Offer,
        FORMAT(sum(case when app_name = 'Instacart' then offer else 0 end) * 100 / SUM(offer), 2) as Instacart_Avg_Offer,
        FORMAT(sum(case when app_name = 'DoorDash' then offer else 0 end) * 100 / SUM(offer), 2)  as DoorDash_Avg_Offer
@@ -64,6 +65,26 @@ FROM offers;
 
 Select *
 from AverageOffers;
+
+/*
+ Need:
+ 1. Average $/mi.
+ 2. Average cost/mi.
+ 3. Average Trip Distance 
+ 4. Average MPG
+  */
+
+CREATE or replace VIEW OffersOverView AS
+SELECT FORMAT(sum(offer), 2)                                      as offers_total,
+       count(offer)                                               as offer_count,
+       FORMAT(sum(offer) / count(offer), 2)                       as average_offer,
+       FORMAT(sum(distance_mi) / count(distance_mi), 2)           as average_trip,
+       FORMAT(sum(fuel_cost_per_mi) / count(fuel_cost_per_mi), 2) as average_fuel_cost_per_mi,
+       FORMAT(sum(mpg) / count(mpg), 2)                           as average_mpg
+FROM offers;
+
+select *
+from OffersOverView;
 
 # 
 # CREATE or replace VIEW AboveAverageOffers AS

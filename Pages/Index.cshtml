@@ -18,20 +18,32 @@
             hx-trigger="load"
             hx-get="@Url.Page("Index", "Search", new { start = 10, end = 0, debug = false })"
             hx-swap="innerHTML"
+            hx-indicator="#zeros_indicator"
             id="leaderboard">
 
             <partial name="_Leaderboard"/>
 
+            <span id="zeros_indicator" class="htmx-indicator">
+                <label>loading ...</label>
+                <img class="w-8" alt="bars" src="~/img/loaders/circle_bars.svg"/>
+            </span>
+
         </div>
 
         <div
-            :class="current_gradient"
-            id="gig_entry_form">
-            <partial name="_GigEntryForm"/>
-        </div>
-        
-        <div id="aggregated_stats" :class="current_gradient">
-            @* <partial name="_GigStats"></partial> *@
+            class="grid grid-cols-1 gap-4 lg:grid-cols-2">
+
+            <div
+                class="border-2 border-red-500"
+                id="gig_entry_form">
+                <partial name="_GigEntryForm"/>
+            </div>
+
+            <div
+                class="border-2 border-green-500"
+                id="aggregated_stats" :class="current_gradient">
+                <partial name="_GigStats"></partial>
+            </div>
         </div>
 
 

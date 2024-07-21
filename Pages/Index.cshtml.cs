@@ -75,8 +75,8 @@ public class IndexModel : PageModel
         offers = (await connection
                 .QueryAsync<GigOffer>($@"select * from offers LIMIT @limit OFFSET @offset;", new
                 {
-                    limit = 3,
-                    offset = 5
+                    limit = 100,
+                    offset = 0
                 }))
 
             // filter using substring:

@@ -9,11 +9,6 @@
     </h1>
 
 
-    <span id="leaderboard_loader" class="htmx-indicator">
-        <label>loading ...</label>
-        <img class="w-64" alt="bars" src="~/img/loaders/loader_10.svg"/>
-    </span>
-
     <div id="gigs_grid" x-init="start_view_timers()" class="grid grid-cols-1 gap-2">
 
         <div
@@ -52,6 +47,10 @@
 
             <partial name="_Leaderboard"/>
 
+            <span id="leaderboard_loader" class="htmx-indicator">
+                <label>loading ...</label>
+                <img class="w-64" alt="bars" src="~/img/loaders/loader_10.svg"/>
+            </span>
         </div>
 
 

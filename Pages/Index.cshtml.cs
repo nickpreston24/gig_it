@@ -14,6 +14,8 @@ public class IndexModel : PageModel
     private readonly ILogger<IndexModel> _logger;
     private double low_offer_upper_bound = .50;
     private double high_offer_lower_bound = 1.00;
+    public List<GigStats> Stats => stats;
+    private static List<GigStats> stats = new();
     public List<GigOffer> Offers => offers;
     private static List<GigOffer> offers = new();
 
@@ -31,6 +33,12 @@ public class IndexModel : PageModel
     public IndexModel(ILogger<IndexModel> logger)
     {
         _logger = logger;
+    }
+
+    public async void OnGet()
+    {
+        using var connection = SQLConnections.GetMySQLConnectionString().AsConnection();
+        var results = await connection.QueryAsync(@"Select * from AverageOffers;");
     }
 
     public async Task OnGetRandomize(GigOffer entry, bool debug = false)
@@ -113,4 +121,9 @@ public class IndexModel : PageModel
     //     distance_mi = 5.0,
     //     MPG = 23.00
     // };
+}
+
+public record GigStats
+{
+    public double AverageOffer { get; set; }
 }

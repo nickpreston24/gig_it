@@ -44,8 +44,7 @@ values ('UberEats', 6.00, 2.00, 23.00, -0.16),
 
 select *
 from offers
-limit 10 
-offset 5
+limit 10 offset 5
 ;
 
 
@@ -53,3 +52,37 @@ offset 5
  
  delete from offers where id > 0;
  */
+
+### Average Offers
+
+CREATE or replace VIEW AverageOffers AS
+SELECT FORMAT(sum(case when app_name = 'UberEats' then offer else 0 end) * 100 / SUM(offer), 2)  as UberEats_Avg_Offer,
+       FORMAT(sum(case when app_name = 'UberX' then offer else 0 end) * 100 / SUM(offer), 2)     as UberX_Avg_Offer,
+       FORMAT(sum(case when app_name = 'Instacart' then offer else 0 end) * 100 / SUM(offer), 2) as Instacart_Avg_Offer,
+       FORMAT(sum(case when app_name = 'DoorDash' then offer else 0 end) * 100 / SUM(offer), 2)  as DoorDash_Avg_Offer
+FROM offers;
+
+Select *
+from AverageOffers;
+
+# 
+# CREATE or replace VIEW AboveAverageOffers AS
+# SELECT offer
+# FROM offers
+# WHERE offer > (SELECT AVG(UberEats_Avg_Offer) FROM AverageOffers)
+# # and app_name = 'UberEats'
+# ;
+# 
+# select *
+# from AboveAverageOffers;
+
+
+# 
+# select id
+#      ,count(*)     as num_app_nameuages
+#      ,sum(offer) as total_offer
+#      ,sum(case when app_name = 'en' then offer else 0 end)  as en_creds
+#      ,sum(case when app_name = 'fr' then offer else 0  end) as fr_creds
+# from offers
+# group
+#     by id;

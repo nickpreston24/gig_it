@@ -35,7 +35,7 @@
     @* <link href="~/lib/daisyui/dist/full.css" rel="stylesheet" type="text/css"/> *@
     @* <script src="~/lib/htmx.org/dist/htmx.min.js" *@
     @*         asp-fallback-src="https://unpkg.com/htmx.org@2.0.1"></script> *@
-    @* <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/> *@
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
 </head>
 <body x-data="setup_layout()" :data-theme="selected_theme">
 <header>
@@ -65,10 +65,12 @@
 
         </slot>
 
-        <span class=" flex flex-row gap-2">
-            <h1 class="text-xl text-accent">Gig IT</h1>
-            <box-icon name='wallet' :color="selected_box_icon_color"></box-icon>
-        </span>
+        <a href="/">
+            <span class=" flex flex-row gap-2">
+                <h1 class="text-xl text-accent">Gig IT</h1>
+                <box-icon name='wallet' :color="selected_box_icon_color"></box-icon>
+            </span>
+        </a>
 
         <slot name="corner">
             @* <div class="dropdown dropdown-end"> *@
@@ -120,8 +122,23 @@
         console.log('setup_layout() initializing ...')
         return {
             my_github: 'https://github.com/nickpreston24?tab=repositories',
-            get selected_box_icon_color() { return 'cyan' },
-            slogan:'lorem ipsum.... !',
+            get selected_box_icon_color() { 
+                return 'yellow'  // todo: coordinate this with the current theme
+            },
+            get theme_fix() {
+                 console.log('selected_theme :>> ', this.selected_theme);
+                let found = this?.theme_fixes[this.selected_theme] ?? '';
+                return found;
+            },
+            get current_gradient() {
+                console.log('selected_theme :>> ', this.selected_theme);
+                let found = this?.gradients[this.selected_theme] ?? '';
+                return found;
+            },
+            theme_fixes: {  
+                // some themes, like cupcake's text are so light, there is not enough contrast, so a darker text is necessary.
+                cupcake: 'text-yellow-500',                
+            },
             gradients: {
                 dark: "bg-gradient-to-l from-blue-500 to-violet-800",
                 light:"bg-gradient-to-r from-cyan-500 to-blue-500",
@@ -136,11 +153,7 @@
                 forest: 'bg-gradient-to-r from-emerald-500 to-emerald-900',
                 coffee: 'bg-gradient-to-r from-amber-900 to-orange-950'
             },
-            get current_gradient() {
-                console.log('selected_theme :>> ', this.selected_theme);
-                let found = this?.gradients[this.selected_theme] ?? '';
-                return found;
-            },
+            
             themes: [
               "light",
               "dark",

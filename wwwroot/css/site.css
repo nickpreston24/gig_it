@@ -2554,6 +2554,10 @@ html {
   width: 13rem;
 }
 
+.w-64 {
+  width: 16rem;
+}
+
 .w-8 {
   width: 2rem;
 }

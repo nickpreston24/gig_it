@@ -27,22 +27,26 @@
 
         <td>
             <div class="tooltip" data-tip="Visit">
-                <a target="_blank" href="@row.route_url">
-                    <div class="font-bold text-secondary truncate">@row.app_name.Trim()</div>
-                </a>
+                <button class="btn btn-sm w-20 text-lg">
+                    <a target="_blank" href="@row.route_url">
+                        <div class="font-bold text-secondary truncate">@row.app_name.Trim()</div>
+                    </a>
+                </button>
             </div>
             <div class="tooltip" data-tip="Delete this record">
                 <form hx-page="Index" hx-target="#leaderboard" hx-delete method="delete">
                     <button
+                        disabled
                         hx-swap="outerHTML"
-                        class="btn btn-accent"
+                        class="btn btn-sm btn-accent"
                         asp-page-handler="Remove">
                         <box-icon name='trash'></box-icon>
                     </button>
                     <button
+                        disabled
                         hx-swap="outerHTML"
                         asp-page-handler="Remove"
-                        class="btn btn-accent">
+                        class="btn  btn-sm btn-accent">
                         <box-icon name='trash'></box-icon>
                     </button>
                 </form>

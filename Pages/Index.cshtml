@@ -8,7 +8,6 @@
         <box-icon size="lg" :color="selected_box_icon_color" name="rocket"></box-icon>
     </h1>
 
-
     <div id="gigs_grid" x-init="start_view_timers()" class="grid grid-cols-1 gap-2">
 
         <div
@@ -27,32 +26,6 @@
 
         </div>
 
-        <div
-
-            x-show="views.leaderboard.show"
-            x-transition:enter="transition ease-out duration-300"
-            x-transition:enter-start="opacity-0 scale-90"
-            x-transition:enter-end="opacity-100 scale-100"
-            x-transition:leave="transition ease-in duration-300"
-            x-transition:leave-start="opacity-100 scale-100"
-            x-transition:leave-end="opacity-0 scale-90"
-
-
-            :class="current_gradient"
-            hx-trigger="load"
-            hx-get="@Url.Page("Index", "Search", new { take = 10, skip = 0, debug = false })"
-            hx-swap="innerHTML"
-            hx-indicator="#leaderboard_loader"
-            id="leaderboard">
-
-            <partial name="_Leaderboard"/>
-
-            <span id="leaderboard_loader" class="htmx-indicator">
-                <label>loading ...</label>
-                <img class="w-64" alt="bars" src="~/img/loaders/loader_10.svg"/>
-            </span>
-        </div>
-
 
         <div
             class="grid grid-cols-1 gap-4 lg:grid-cols-2">
@@ -65,8 +38,6 @@
                 x-transition:leave="transition ease-in duration-300"
                 x-transition:leave-start="opacity-100 scale-100"
                 x-transition:leave-end="opacity-0 scale-90"
-
-
 
                 class="border-0 border-red-500"
                 id="gig_entry_form">
@@ -86,6 +57,30 @@
             </div>
         </div>
 
+        <div
+            x-show="views.leaderboard.show"
+            x-transition:enter="transition ease-out duration-300"
+            x-transition:enter-start="opacity-0 scale-90"
+            x-transition:enter-end="opacity-100 scale-100"
+            x-transition:leave="transition ease-in duration-300"
+            x-transition:leave-start="opacity-100 scale-100"
+            x-transition:leave-end="opacity-0 scale-90"
+
+            :class="current_gradient"
+            hx-trigger="load"
+            hx-get="@Url.Page("Index", "Search", new { take = 10, skip = 0, debug = false })"
+            hx-swap="innerHTML"
+            hx-indicator="#leaderboard_loader"
+            id="leaderboard">
+
+            <partial name="_Leaderboard"/>
+
+            <span id="leaderboard_loader" class="htmx-indicator">
+                <label>loading ...</label>
+                <img class="w-64" alt="bars" src="~/img/loaders/loader_10.svg"/>
+            </span>
+        </div>
+
     </div>
 </section>
 <script>
@@ -96,7 +91,7 @@
                 leaderboard: { show: false },
                 entry_form: { show: false },
                 stats: { show: false },
-             } ,
+             },
             start_view_timers() {
                 setTimeout(()=> this.views.leaderboard.show = true , 250);
                 setTimeout(()=> this.views.entry_form.show = true , 500);

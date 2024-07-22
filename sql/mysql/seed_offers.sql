@@ -31,7 +31,6 @@ create table if not exists offers
     PRIMARY KEY (id)
 );
 
-/*
 insert into offers (app_name, offer, distance_mi, mpg, fuel_cost_per_mi)
 values ('UberEats', 6.00, 2.00, 23.00, -0.16),
        ('UberEats', 5.00, 2.00, 23.00, -0.16),
@@ -40,7 +39,7 @@ values ('UberEats', 6.00, 2.00, 23.00, -0.16),
        ('Instacart', 11.34, 4.00, 23.00, -0.16),
        ('Instacart', 11.13, 2.80, 23.00, -0.16)
 ;
- */
+
 
 select *
 from offers
@@ -86,6 +85,7 @@ FROM offers;
 select *
 from OffersOverView;
 
+
 # 
 # CREATE or replace VIEW AboveAverageOffers AS
 # SELECT offer
@@ -107,3 +107,13 @@ from OffersOverView;
 # from offers
 # group
 #     by id;
+
+
+/*
+ 
+ I learned something new last night when I was playing around with my app, something I missed when working my software jobs... And that something is Views.
+Basically, Views are like having two Sheets inside an Excel workbook, and having Sheet1 hold all the raw rows of data (like your cruise finances) and Sheet2 having all the major calculations, like maybe 'average cabin cost', or 'average trip length'.
+This is the code I wrote last night to do the same thing, but for my future user's trips.
+Notice the stuff on the right after the purple 'as' text: (average_offer, average_mpg, etc.).  Those are values I wanna show my users to help them pick better dashes.
+Normally, I'd have these calculated every time the user requests them.  But by declaring this code as a View (see the top line), each of those calculations you see below (e.g. sum(mpg)/count(mpg)) are automatically calculated for the entire data set, every time a User of mine submits a new dash offer!  
+ */

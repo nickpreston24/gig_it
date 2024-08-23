@@ -1,0 +1,32 @@
+﻿@page
+@model IndexModel
+@{
+}
+
+<div>
+    <h1>Validating nuget packages </h1>
+    <p>hello there!</p>
+    @* <button *@
+    @*     hx-trigger='load' *@
+    @*     hx-get="@Url.Page("Index", "Types")"> *@
+    @*     types *@
+    @* </button> *@
+    @* <button hx-get="@Url.Page("Index", "RunDiagnostics")">diagnostics</button> *@
+    @* <button *@
+    @*     hx-trigger='load' *@
+    @*     hx-get="@Url.Page("Index", "ReadEmbeds")"> *@
+    @*     ReadEmbeds *@
+    @* </button> *@
+    @* *@
+    @* <button *@
+    @*     hx-trigger='load' *@
+    @*     hx-get="@Url.Page("Index", "FakeLib")"> *@
+    @*     FakeLib *@
+    @* </button> *@
+    @* *@
+    <div
+        hx-trigger='load'
+        hx-get="@Url.Page("Index", "Person", new { view = "_PersonDetails" })">
+    </div>
+
+</div>

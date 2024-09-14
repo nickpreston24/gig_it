@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using gig_it.Models;
 
-namespace fake_razor_regex_fix.Pages;
+namespace gig_it.Pages.Sandbox;
 
 public class IndexModel : PageModel
 {
@@ -53,9 +53,17 @@ public class IndexModel : PageModel
 
     public async Task<IActionResult> OnGetPerson(string view = "")
     {
-        Console.WriteLine("view: " + view);
-        var person = Resources.Embedded.Person;
-        Console.WriteLine(person);
-        return Partial(view, person);
+        try
+        {
+            Console.WriteLine("view: " + view);
+            var person = Resources.Embedded.Person;
+            Console.WriteLine(person);
+            return Partial(view, person);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return Partial("_Alert", e);
+        }
     }
 }

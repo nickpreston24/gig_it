@@ -10,7 +10,7 @@
     <script defer
             src="~/hydro/alpine.js"
             asp-append-version="true"></script>
-    <script src="https://unpkg.com/htmx.org@2.0.0"></script>
+    <script src="https://unpkg.com/htmx.org@2.0.2"></script>
 
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css"/>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -50,7 +50,7 @@
 
             <li>
                 <a target="_" :href="my_github">
-                    <box-icon type='logo' :color="selected_box_icon_color" name='github'></box-icon>
+                    <box-icon type='logo' color="white" class="bg-accent-content/25" name='github'></box-icon>
                     GitHub
                     <div class="badge badge-secondary">+100</div>
                 </a>
@@ -62,7 +62,12 @@
                     Health
                 </a>
             </li>
-
+            <li>
+                <a href="/Sandbox">
+                    <box-icon type='plus' :color="selected_box_icon_color" name='github'></box-icon>
+                    Sandbox
+                </a>
+            </li>
         </slot>
 
         <a href="/">
@@ -117,7 +122,7 @@
 </hydro-footer>
 
 <script type="text/javascript">
-    let previous = localStorage.getItem('theme') ?? "light";
+    var previous = localStorage.getItem('theme') ?? "light";
     function setup_layout() {
         console.log('setup_layout() initializing ...')
         return {

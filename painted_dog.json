@@ -1,0 +1,14 @@
+{
+  "Name": "Woofy",
+  "Hobbies": [
+    "Digging",
+    "Yipping",
+    "Eating"
+  ],
+  "Age": 5,
+  "best_friend": {
+    "Name": "Nayala",
+    "Hobbies": [],
+    "Age": 6
+  }
+}

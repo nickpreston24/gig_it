@@ -1,6 +1,7 @@
 using System.Reflection;
 using System.Text;
 using System.Text.Json;
+using CodeMechanic.Diagnostics;
 
 namespace gig_it.Models;
 
@@ -28,9 +29,11 @@ public static class Resources
             {
                 var info = Assembly.GetExecutingAssembly().GetName();
                 var name = info.Name;
+                Console.WriteLine("ass name:>> " + name);
                 using var stream = Assembly
                     .GetExecutingAssembly()
                     .GetManifestResourceStream($"{name}.Embedded.person.json")!;
+                stream.Dump("stream");
                 return JsonSerializer.Deserialize<Person>(stream)!;
             }
         }

@@ -6,6 +6,5 @@ public class DoorDash : PageModel
 {
     public void OnGet()
     {
-        
     }
 }

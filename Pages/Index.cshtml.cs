@@ -5,7 +5,6 @@ using CodeMechanic.Types;
 using gig_it.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using MySql.Data.MySqlClient;
 using Dapper;
 
 namespace gig_it.Pages;

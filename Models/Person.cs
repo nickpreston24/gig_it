@@ -1,4 +1,3 @@
-
 namespace gig_it.Models;
 
 public record Person(string Name, string[] Hobbies)

@@ -4,7 +4,5 @@ namespace gig_it.Pages;
 
 public class DoorDash : PageModel
 {
-    public void OnGet()
-    {
-    }
+    public void OnGet() { }
 }

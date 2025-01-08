@@ -14,7 +14,7 @@ public static class EnumerableExtensions
             // 1 item or 2 items
             not null => string.Join(" and ", items),
             // null
-            _ => string.Empty
+            _ => string.Empty,
         };
 
         return result;

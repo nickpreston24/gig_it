@@ -5,9 +5,8 @@ namespace gig_it.Pages;
 /// </summary>
 public record GigStats
 {
-    public double average_usd_per_mi => average_trip > 0
-        ? (average_offer / average_trip).Round(2)
-        : -1;
+    public double average_usd_per_mi =>
+        average_trip > 0 ? (average_offer / average_trip).Round(2) : -1;
 
     public double offers_total { get; set; }
     public double offer_count { get; set; }

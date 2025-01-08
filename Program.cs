@@ -14,14 +14,10 @@ var builder = WebApplication.CreateBuilder(args);
 var main_assembly = Assembly.GetExecutingAssembly();
 builder.Services.AddSingleton<IEmbeddedResourceQuery>(
     new EmbeddedResourceService(
-            new Assembly[]
-            {
-                main_assembly
-            },
-            debugMode: false
-        )
-        .CacheAllEmbeddedFileContents());
-
+        new Assembly[] { main_assembly },
+        debugMode: false
+    ).CacheAllEmbeddedFileContents()
+);
 
 // Add services to the container.
 builder.Services.AddRazorPages();

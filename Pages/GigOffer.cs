@@ -8,7 +8,7 @@ public record GigOffer
     public string app_name { get; set; } = string.Empty;
     public string route_url { get; set; } = string.Empty;
 
-    // [BindProperty(SupportsGet = true)] 
+    // [BindProperty(SupportsGet = true)]
     public double offer { get; set; }
 
     // [BindProperty(SupportsGet = true)]
@@ -17,9 +17,8 @@ public record GigOffer
 
     public double tank_size_gal { get; set; }
 
-    // [BindProperty(SupportsGet = true)] 
+    // [BindProperty(SupportsGet = true)]
     public double MPG { get; set; } = 0.00;
-
 
     /*USER */
     public string UserName { get; set; } = "Anon";
@@ -31,7 +30,6 @@ public record GigOffer
     public double percent_profit => (profit / offer * 1.00).Round();
     public double dollars_per_mile => (offer / distance_mi).Round(2);
     public double profit_per_mile => (profit / distance_mi).Round();
-
 
     public override string ToString()
     {

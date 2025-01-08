@@ -1,11 +1,11 @@
 using System.Reflection;
 using CodeMechanic.Diagnostics;
-using CodeMechanic.Fake;
 using CodeMechanic.Embeds;
+using CodeMechanic.Fake;
 using CodeMechanic.Types;
+using gig_it.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using gig_it.Models;
 
 namespace gig_it.Pages.Sandbox;
 
@@ -18,9 +18,7 @@ public class IndexModel : PageModel
         _logger = logger;
     }
 
-    public void OnGet()
-    {
-    }
+    public void OnGet() { }
 
     public async Task<IActionResult> OnGetTypes()
     {
